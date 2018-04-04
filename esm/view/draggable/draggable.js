@@ -140,18 +140,17 @@ var Draggable = function (_Component) {
     };
 
     _this.getTransformOffset = memoizeOne(function (transformRef) {
-      if (!transformRef) {
-        return {
-          left: 0,
-          top: 0
-        };
+      if (transformRef) {
+        var _transformRef$getBoun = transformRef.getBoundingClientRect(),
+            left = _transformRef$getBoun.left,
+            top = _transformRef$getBoun.top;
+
+        return { left: left, top: top };
       }
-
-      var _this$transformRef$ge = _this.transformRef.getBoundingClientRect(),
-          x = _this$transformRef$ge.x,
-          y = _this$transformRef$ge.y;
-
-      return { left: x, top: y };
+      return {
+        left: 0,
+        top: 0
+      };
     });
     _this.getDraggingStyle = memoizeOne(function (dimension, isDropAnimating, movementStyle) {
       var _dimension$client$pad = dimension.client.paddingBox,
